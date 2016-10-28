@@ -1,4 +1,9 @@
-# Extract jpg's from pdf's. Quick and dirty.
+# This script is adapted from the code at http://nedbatchelder.com/blog/200712/extracting_jpgs_from_pdfs.html
+
+# To use this, simply run the script from the same directory as the PDFs. The script finds all documents in the folder ending in ".pdf" and extracts JPGs from them. This method may only work reliably on scanned documents, which will have a single source image per page.
+
+# The script is currently set up to create a "PDFs" subfolder to save all outputs to.
+
 import sys, os
 
 for item in os.listdir(os.getcwd()):
@@ -35,7 +40,7 @@ for item in os.listdir(os.getcwd()):
 			jpg = pdf[istart:iend]
 			if not os.path.exists(os.getcwd() + '/PDFs'):
 				os.makedirs(os.getcwd() + '/PDFs')
-			jpgfile = file(os.getcwd() + "/PDFs/" + item[:-4] + " (page " + str(n) + ").jpg" % njpg, "wb")
+			jpgfile = file(os.getcwd() + "/PDFs/" + item[:-4] + "_(" + str(n) + ").jpg" % njpg, "wb")
 			jpgfile.write(jpg)
 			jpgfile.close()
 	 
