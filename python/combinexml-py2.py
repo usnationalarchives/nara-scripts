@@ -16,8 +16,10 @@ for fname in filenames:
 	if (in_size + out_size) > 75:
 		file = re.split('\.', outputfile)[0] + '_' + str(counter) + '.xml'
 		counter = counter + 1
-	with open(file, 'a') as outfile:   
+	with open(file, 'a') as outfile:
+		outfile.write('import xmlns="http://ui.das.nara.gov/"><fileUnitArray>')
 		with open(fname) as infile:
 			for line in infile:
 				outfile.write(line)
+		outfile.write('</fileUnitArray></import>')
 print "Complete."
