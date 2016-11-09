@@ -65,9 +65,9 @@ try:
 				while n > -1:
 					start = t['subtitles'][n]['start']
 					end = t['subtitles'][n]['end']
-					text = t['subtitles'][n]['text'].decode('utf-8')
+					text = t['subtitles'][n]['text'].encode('utf-8')
 	
-					transcription = transcription + '[' + calculate_time(start) + '–'.decode('utf-8') + calculate_time(end) + ']\n' + text.replace('<br>','\n') + '\n'
+					transcription = transcription + '[' + calculate_time(start) + '-' + calculate_time(end) + ']\n' + text.replace('<br>','\n') + '\n'
 					n = n + 1
 ## Reached end of transcription:
 			except IndexError:
