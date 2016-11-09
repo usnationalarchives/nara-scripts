@@ -7,8 +7,8 @@
 import sys, os
 
 for item in os.listdir(os.getcwd()):
-	n = 1
 	if item.endswith(".pdf"):
+		print item
 
 		pdf = file(item, "rb").read()
 
@@ -17,14 +17,15 @@ for item in os.listdir(os.getcwd()):
 		endmark = "\xff\xd9"
 		endfix = 2
 		i = 0
+		njpg = 1
 
-		njpg = 0
 		while True:
 			istream = pdf.find("stream", i)
 			if istream < 0:
 				break
 			istart = pdf.find(startmark, istream, istream+20)
 			if istart < 0:
+				print pdf
 				i = istream+20
 				continue
 			iend = pdf.find("endstream", istart)
@@ -40,10 +41,9 @@ for item in os.listdir(os.getcwd()):
 			jpg = pdf[istart:iend]
 			if not os.path.exists(os.getcwd() + '/PDFs'):
 				os.makedirs(os.getcwd() + '/PDFs')
-			jpgfile = file(os.getcwd() + "/PDFs/" + item[:-4] + "_(" + str(n) + ").jpg" % njpg, "wb")
+			jpgfile = file(os.getcwd() + "/PDFs/" + item[:-4] + "_(" + str(njpg) + ").jpg", "wb")
 			jpgfile.write(jpg)
 			jpgfile.close()
 	 
-	 		n = n + 1
 			njpg += 1
 			i = iend
