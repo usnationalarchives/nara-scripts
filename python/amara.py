@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import csv, requests, json, re
 
 with open('amara.csv', 'wb') as write :
@@ -5,12 +7,20 @@ with open('amara.csv', 'wb') as write :
 	writelog.writerow( ('num', 'visible', 'NAID', 'id', 'language', 'url' ) )
 write.closed
 
+## Function to convert milliseconds to timestamp
+
+def calculate_time(ms):
+	x = ms / 1000
+	seconds = x % 60
+	x /= 60
+	minutes = x % 60
+	return str(minutes).zfill(2) + ':' + str(seconds).zfill(2)
+
 offset = 0
 try:
 	while offset < 300:
 
 		amara  = json.loads(requests.get('https://amara.org/api/videos/?format=json&limit=100&offset=' + str(offset) + '&team=national-archives', headers= {'X-api-username': 'dominic.Byrd-McDevitt@nara.gov', 'X-api-key': 'fdd058617f6da2392a4e357f557527002eaaa756'}).text)
-		print amara
 		video = 0
 		lang = 0
 		while video < 100:
@@ -46,8 +56,33 @@ try:
 				writelog = csv.writer(write, delimiter= '\t', quoting=csv.QUOTE_ALL)
 				writelog.writerow( (str(num), visible, naid, id, language, api_url ) )
 			write.closed
+			
+			t  = json.loads(requests.get(api_url, headers= {'X-api-username': 'dominic.Byrd-McDevitt@nara.gov', 'X-api-key': 'fdd058617f6da2392a4e357f557527002eaaa756'}).text)
+			
+			n = 0
+			transcription = ''
+			try:
+				while n > -1:
+					start = t['subtitles'][n]['start']
+					end = t['subtitles'][n]['end']
+					text = t['subtitles'][n]['text'].decode('utf-8')
+	
+					transcription = transcription + '[' + calculate_time(start) + '–'.decode('utf-8') + calculate_time(end) + ']\n' + text.replace('<br>','\n') + '\n'
+					n = n + 1
+## Reached end of transcription:
+			except IndexError:
+				pass
+## Handles missing (null) timestamps:
+			except TypeError:
+				text = t['subtitles'][n]['text']
+				transcription = transcription + text.replace('<br>','\n') + '\n'
+				n = n + 1
+## No transcription here:
+			except KeyError:
+				pass
 	
 			video = video + 1
 		offset = offset + 100
+		
 except IndexError:
 	pass
