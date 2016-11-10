@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import csv, requests, json, re
+import csv, requests, json, re, sys  
+
+reload(sys)  
+sys.setdefaultencoding('utf8')
 
 with open('amara.csv', 'wb') as write :
 	writelog = csv.writer(write, delimiter= '\t', quoting=csv.QUOTE_ALL)
@@ -65,7 +68,7 @@ try:
 				while n > -1:
 					start = t['subtitles'][n]['start']
 					end = t['subtitles'][n]['end']
-					text = t['subtitles'][n]['text'].encode('utf-8')
+					text = t['subtitles'][n]['text']
 	
 					transcription = transcription + '[' + calculate_time(start) + '-' + calculate_time(end) + ']\n' + text.replace('<br>','\n') + '\n'
 					n = n + 1
