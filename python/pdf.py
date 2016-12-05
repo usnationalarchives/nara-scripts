@@ -8,9 +8,11 @@ for item in os.listdir(os.getcwd()):
 		start = datetime.datetime.now()
 		with Image(filename=item) as readpdf:
 			pages = len(readpdf.sequence)
-			if not os.path.exists(os.getcwd() + '/PDFs'):
-				os.makedirs(os.getcwd() + '/PDFs')
-			jpgfile = os.getcwd() + "/PDFs/" + item[:-4] + ".jpg"
+			folder = os.getcwd() + '/' + item[:-4]
+			if not os.path.exists(folder):
+				os.makedirs(folder)
+			jpgfile = folder + '/' + item[:-4] + '.jpg'
 			readpdf.save(filename=jpgfile)
+		os.rename(item, folder + '/' + item)
 		end = datetime.datetime.now()
 		print 'Took ' + str(int(round((end - start).total_seconds()))) + ' seconds for "' + item + '" (' + str(pages) + ' page(s)).'
