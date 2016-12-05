@@ -7,6 +7,10 @@ counter = 2
 outputfile = file
 
 print 'Combining XML files...'
+
+with open(file, 'a') as outfile:
+	outfile.write('<import xmlns="http://ui.das.nara.gov/"><fileUnitArray>')
+
 for fname in filenames:  	
 	in_size = (os.stat(fname).st_size / 1000000)
 	try:
@@ -14,12 +18,17 @@ for fname in filenames:
 	except OSError:
 		out_size = 0
 	if (in_size + out_size) > 75:
+		with open(file, 'a') as outfile:
+			outfile.write('</fileUnitArray></import>')
+		
 		file = re.split('\.', outputfile)[0] + '_' + str(counter) + '.xml'
 		counter = counter + 1
+		
+		with open(file, 'a') as outfile:
+			outfile.write('<import xmlns="http://ui.das.nara.gov/"><fileUnitArray>')
+	
 	with open(file, 'a') as outfile:
-		outfile.write('<import xmlns="http://ui.das.nara.gov/"><fileUnitArray>')
 		with open(fname) as infile:
 			for line in infile:
 				outfile.write(line)
-		outfile.write('</fileUnitArray></import>')
 print "Complete."
