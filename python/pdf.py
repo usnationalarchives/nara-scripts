@@ -6,12 +6,15 @@ from wand.image import Image
 for item in os.listdir(os.getcwd()):
 	if item.endswith(".pdf"):
 		start = datetime.datetime.now()
-		with Image(filename=item) as readpdf:
+		with Image(filename=item, resolution=300) as readpdf:
 			pages = len(readpdf.sequence)
 			folder = os.getcwd() + '/' + item[:-4]
 			if not os.path.exists(folder):
 				os.makedirs(folder)
 			jpgfile = folder + '/' + item[:-4] + '.jpg'
+ 			readpdf.compression_quality = 100
+			readpdf.compression = 'no'
+			readpdf.COLORSPACE_TYPES = 'srgb'
 			readpdf.save(filename=jpgfile)
 		os.rename(item, folder + '/' + item)
 		end = datetime.datetime.now()
