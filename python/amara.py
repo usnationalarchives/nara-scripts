@@ -23,7 +23,7 @@ offset = 0
 try:
 	while offset < 300:
 
-		amara  = json.loads(requests.get('https://amara.org/api/videos/?format=json&limit=100&offset=' + str(offset) + '&team=national-archives', headers= {'X-api-username': 'dominic.Byrd-McDevitt@nara.gov', 'X-api-key': 'fdd058617f6da2392a4e357f557527002eaaa756'}).text)
+		amara  = json.loads(requests.get('https://amara.org/api/videos/?format=json&limit=100&offset=' + str(offset) + '&team=national-archives', headers= {'X-api-username': '', 'X-api-key': ''}).text)
 		video = 0
 		lang = 0
 		while video < 100:
@@ -60,7 +60,7 @@ try:
 				writelog.writerow( (str(num), visible, naid, id, language, api_url ) )
 			write.closed
 			
-			t  = json.loads(requests.get(api_url, headers= {'X-api-username': 'dominic.Byrd-McDevitt@nara.gov', 'X-api-key': 'fdd058617f6da2392a4e357f557527002eaaa756'}).text)
+			t  = json.loads(requests.get(api_url, headers= {'X-api-username': '', 'X-api-key': ''}).text)
 			
 			n = 0
 			transcription = ''
