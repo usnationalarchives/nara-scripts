@@ -31,6 +31,8 @@ with open(output_xml, 'a') as outfile:
 	
 for row in csvReader:
 	data_control_group = row[dataControlGroup]
+	if data_control_group == '':
+		print 'Blank dataControlGroup found in line ' + str(csvReader.line_num)
 	if data_control_group == 'LL':
 		reference_unit = 'Center for Legislative Archives'
 		location = 'National Archives Building - Archives I (Washington, DC)'
@@ -95,6 +97,10 @@ for row in csvReader:
 		reference_unit = 'William J. Clinton Library'
 		location = 'William J. Clinton Library (Little Rock, AR)'
 		ou_group = 'NLWJC'
+	if data_control_group == 'RDF':
+		reference_unit = 'National Archives at College Park - FOIA'
+		location = 'National Archives at College Park - Archives II (College Park, MD)'
+		ou_group = 'RDF'
 	if data_control_group == 'RDSC':
 		reference_unit = 'National Archives at College Park - Cartographic'
 		location = 'National Archives at College Park - Archives II (College Park, MD)'
@@ -167,6 +173,11 @@ for row in csvReader:
 		reference_unit = 'National Archives at Seattle'
 		location = 'NARA\'s Pacific Alaska Region (Seattle, WA)'
 		ou_group = 'NRIAS'
+	else:
+		reference_unit = '[REFERENCE UNIT REQUIRED]'
+		location = '[LOCATION REQUIRED]'
+		ou_group = '[OU GROUP REQUIRED]'
+		
 	parent_series_naid = row[parentSeriesNaid]
 	title2 = row[title]
 	container_id = row[containerId]
@@ -183,6 +194,31 @@ for row in csvReader:
 	specific_media_type = row[specificMediaType]
 	general_media_type = row[generalMediaType]
 	
+	if parent_series_naid == '':
+		parent_series_naid = '[PARENT SERIES NAID REQUIRED]'
+		print 'Blank parentSeriesNaid found in line ' + str(csvReader.line_num)
+	if title2 == '':
+		title2 = '[TITLE REQUIRED]'
+		print 'Blank title found in line ' + str(csvReader.line_num)
+	if access_restriction_status == '':
+		access_restriction_status = '[ACCESS RESTRICTION STATUS REQUIRED]'
+		print 'Blank accessRestrictionStatus found in line ' + str(csvReader.line_num)
+	if use_restriction_status == '':
+		use_restriction_status = '[USE RESTRICTION STATUS REQUIRED]'
+		print 'Blank useRestrictionStatus found in line ' + str(csvReader.line_num)
+	if general_records_type == '':
+		general_records_type = '[GENERAL RECORDS TYPE REQUIRED]'
+		print 'Blank generalRecordsType found in line ' + str(csvReader.line_num)
+	if copy_status == '':
+		copy_status = '[COPY STATUS REQUIRED]'
+		print 'Blank copyStatus found in line ' + str(csvReader.line_num)
+	if specific_media_type == '':
+		specific_media_type = '[SPECIFIC MEDIA TYPE REQUIRED]'
+		print 'Blank specificMediaType found in line ' + str(csvReader.line_num)
+	if general_media_type == '':
+		general_media_type = '[GENERAL MEDIA TYPE REQUIRED]'
+		print 'Blank generalMediaType found in line ' + str(csvReader.line_num)
+		
 	das_xml = """<fileUnit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <sequenceOrder>""" + str(sequence_order) + """</sequenceOrder>
 <title>""" + title2 + """</title>
