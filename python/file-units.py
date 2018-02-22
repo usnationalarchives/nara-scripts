@@ -1,26 +1,26 @@
 import csv, xml
 
-file_unit = open("test2.csv", "r")
+file_unit = open('test2.csv', 'r')
 output_xml = 'output.xml'
 
 csvReader = csv.reader(file_unit)
 header = next(csvReader)
-dataControlGroup = header.index("dataControlGroup")
-parentSeriesNaid = header.index("parentSeriesNaid")
-title = header.index("title")
-containerId = header.index("containerId")
-scopeAndContentNote = header.index("scopeAndContentNote")
-accessRestrictionStatus = header.index("accessRestrictionStatus")
-specificAccessRestriction = header.index("specificAccessRestriction")
-securityClassification = header.index("securityClassification")
-accessRestrictionNote = header.index("accessRestrictionNote")
-useRestrictionStatus = header.index("useRestrictionStatus")
-specificUseRestriction = header.index("specificUseRestriction")
-useRestrictionNote = header.index("useRestrictionNote")
-generalRecordsType = header.index("generalRecordsType")
-copyStatus = header.index("copyStatus")
-specificMediaType = header.index("specificMediaType")
-generalMediaType = header.index("generalMediaType")
+dataControlGroup = header.index('dataControlGroup')
+parentSeriesNaid = header.index('parentSeriesNaid')
+title = header.index('title')
+containerId = header.index('containerId')
+scopeAndContentNote = header.index('scopeAndContentNote')
+accessRestrictionStatus = header.index('accessRestrictionStatus')
+specificAccessRestriction = header.index('specificAccessRestriction')
+securityClassification = header.index('securityClassification')
+accessRestrictionNote = header.index('accessRestrictionNote')
+useRestrictionStatus = header.index('useRestrictionStatus')
+specificUseRestriction = header.index('specificUseRestriction')
+useRestrictionNote = header.index('useRestrictionNote')
+generalRecordsType = header.index('generalRecordsType')
+copyStatus = header.index('copyStatus')
+specificMediaType = header.index('specificMediaType')
+generalMediaType = header.index('generalMediaType')
 
 sequence_order = 1
 
