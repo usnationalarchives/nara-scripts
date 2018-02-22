@@ -1,6 +1,6 @@
 import csv, xml
 
-file_unit = open("test.csv", "r")
+file_unit = open("test2.csv", "r")
 output_xml = 'output.xml'
 
 csvReader = csv.reader(file_unit)
@@ -33,6 +33,10 @@ for row in csvReader:
 	data_control_group = row[dataControlGroup]
 	if data_control_group == '':
 		print 'Blank dataControlGroup found in line ' + str(csvReader.line_num)
+		data_control_group = '[DATA CONTROL GROUP REQUIRED]'
+		reference_unit = '[REFERENCE UNIT REQUIRED]'
+		location = '[LOCATION REQUIRED]'
+		ou_group = '[OU GROUP REQUIRED]'
 	if data_control_group == 'LL':
 		reference_unit = 'Center for Legislative Archives'
 		location = 'National Archives Building - Archives I (Washington, DC)'
@@ -173,10 +177,6 @@ for row in csvReader:
 		reference_unit = 'National Archives at Seattle'
 		location = 'NARA\'s Pacific Alaska Region (Seattle, WA)'
 		ou_group = 'NRIAS'
-	else:
-		reference_unit = '[REFERENCE UNIT REQUIRED]'
-		location = '[LOCATION REQUIRED]'
-		ou_group = '[OU GROUP REQUIRED]'
 		
 	parent_series_naid = row[parentSeriesNaid]
 	title2 = row[title]
