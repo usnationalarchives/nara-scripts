@@ -1,6 +1,7 @@
 import csv, xml
 
 file_unit = open("test.csv", "r")
+output_xml = 'output.xml'
 
 csvReader = csv.reader(file_unit)
 header = next(csvReader)
@@ -22,6 +23,11 @@ specificMediaType = header.index("specificMediaType")
 generalMediaType = header.index("generalMediaType")
 
 sequence_order = 1
+
+print 'Creating DAS XML...'
+
+with open(output_xml, 'a') as outfile:
+	outfile.write('<import xmlns="http://ui.das.nara.gov/"><fileUnitArray>')
 	
 for row in csvReader:
 	data_control_group = row[dataControlGroup]
@@ -195,7 +201,12 @@ for row in csvReader:
 </fileUnit>
 """
 
-	f = open('output.xml', 'a')
+	f = open(output_xml, 'a')
 	f.write(das_xml) 
 	f.close()
 	sequence_order = sequence_order + 1
+
+with open(output_xml, 'a') as outfile:
+	outfile.write('</fileUnitArray></import>')
+	
+print 'DAS XML complete!'
