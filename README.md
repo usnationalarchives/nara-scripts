@@ -14,4 +14,9 @@ Use the [issues](https://github.com/usnationalarchives/nara-scripts/issues) page
 * [downloadurls-py2.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/downloadurls-py2.py) - Download all files from URLs listed in a text file (Python 2)
 * [downloadurls-py3.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/downloadurls-py3.py) - Download all files from URLs listed in a text file (Python 3)
 * [file-units.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/file-units.py) - Convert file unit submission spreadsheet (CSV) into DAS-compliant XML (Python 3)
+* [ocr-jpg.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/ocr-jpg.py) - Generate OCR data from JPG files (Python 2)
+	* Dependencies:
+		* [Tesseract](https://github.com/tesseract-ocr/tesseract)
+		* [pytesseract](https://github.com/madmaze/pytesseract)
+		* [Python Imaging Library (PIL)](https://www.pythonware.com/products/pil/)
 * [pdf.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/pdf.py) - Convert PDF documents to JPGs (Python 2)
