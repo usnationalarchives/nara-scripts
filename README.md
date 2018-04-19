@@ -20,3 +20,4 @@ Use the [issues](https://github.com/usnationalarchives/nara-scripts/issues) page
 		* [pytesseract](https://github.com/madmaze/pytesseract)
 		* [Python Imaging Library (PIL)](https://www.pythonware.com/products/pil/)
 * [pdf.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/pdf.py) - Convert PDF documents to JPGs (Python 2)
+* [s3_file_list.py](https://github.com/usnationalarchives/nara-scripts/blob/master/python/s3_file_list.py) - Generate a CSV listing of files on S3 cloud storage (Python 2)
